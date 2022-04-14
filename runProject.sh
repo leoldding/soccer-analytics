@@ -1,0 +1,2 @@
+./datamr.sh
+./stats.sh
