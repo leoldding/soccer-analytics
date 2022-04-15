@@ -1,2 +1,2 @@
-./datamr.sh
-./stats.sh
+./scripts/datamr.sh
+./scripts/stats.sh
