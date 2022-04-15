@@ -24,8 +24,9 @@ public class combineAndClean{
         {
             paths = paths + args[i] + ",";
         }
-
-        FileInputFormat.addInputPaths(job, paths.substring(0,paths.length()-1));
+	
+	FileInputFormat.setInputDirRecursive(job, true);
+        FileInputFormat.addInputPath(job, new Path( args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[args.length-1]));
 
         job.setMapperClass(combineAndCleanMapper.class);

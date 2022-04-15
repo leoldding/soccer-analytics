@@ -57,16 +57,31 @@ public class combineAndCleanMapper extends Mapper<Object, Text, Text, Text> {
             }
             if(viableRecord)
             {
-                loop3:
-                for(int i = 10; i < 22; i++)
-                {
-                    if(!isInt(values[i]))
+		if(isInt(values[10]))
+		{
+                    loop3:
+                    for(int i = 10; i < 22; i++)
                     {
-                        viableRecord = false;
-                        break loop3;
+                        if(!isInt(values[i]))
+                        {
+                            viableRecord = false;
+                            break loop3;
+                        }
+                        record.append(values[i]).append(",");
                     }
-                    record.append(values[i]).append(",");
-                }
+		}
+		else
+		{
+		    loop3:
+		    for(int i = 11; i < 23; i++)
+		    {
+			if(!isInt(values[i]))
+			{
+			    viableRecord = false;
+			    break loop3;
+			}
+		    }
+		}
             }
             if(viableRecord)
             {
