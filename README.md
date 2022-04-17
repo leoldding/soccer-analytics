@@ -5,8 +5,7 @@ NYU Processing Big Data for Analytics Applications Project
 *This assumes that you are affiliated with NYU and are able to access the university's High Performance Cluster (HPC)*
 
 1. Load all files into HPC login node.
-2. Make sure that all .sh files are executable.
-- If they are not, running *chmod 755 (fileName)* will allow for file execution. 
+2. Make sure that all .sh files are executable. If they are not, running *chmod 755 (fileName)* will allow for file execution. 
 3. Run the *runProject.sh* file by inputting ./runProject.sh into the terminal.
 4. Follow the prompts and wait until all scripts are finished.
 
