@@ -1,50 +1,44 @@
-echo Does directory exist with data? '[yes/no]'
+echo 'Is this the first time running the script? [yes/no]'
 read res
-if [ $res = 'no' ]
+if [ $res = 'yes' ]
 then
 hdfs dfs -mkdir soccerAnalytics
 hdfs dfs -put seasonsData soccerAnalytics
-fi
 
 cd combineAndClean
 javac -classpath `yarn classpath` -d . combineAndCleanMapper.java
 javac -classpath `yarn classpath` -d . combineAndCleanReducer.java
 javac -classpath `yarn classpath`:. -d . combineAndClean.java
 jar -cvf combineAndClean.jar *.class
+cd ..
+fi
 
-echo Which dataset do you want to be used?
-echo Enter dataset number:
-echo 1 English Premier League
-echo 2 Spanish La Liga
-echo 3 Italian Serie A 
-echo 4 All Leagues
-read directory
-
-if [ $res = 'yes' ] 
+if [ $res = 'no' ] 
 then
 hdfs dfs -rm -r soccerAnalytics/data
 fi
 
-if [ $directory -eq 1 ]
+if [ $2 -eq 1 ]
 then
-hadoop jar combineAndClean.jar combineAndClean soccerAnalytics/seasonsData/englishPremierLeague /user/$1/soccerAnalytics/data
+hadoop jar combineAndClean/combineAndClean.jar combineAndClean soccerAnalytics/seasonsData/englishPremierLeague /user/$1/soccerAnalytics/data
+fileName='englishPremierLeague.csv'
 fi
-if [ $directory -eq 2 ]
+if [ $2 -eq 2 ]
 then
-hadoop jar combineAndClean.jar combineAndClean soccerAnalytics/seasonsData/spanishLaLiga /user/$1/soccerAnalytics/data
+hadoop jar combineAndClean/combineAndClean.jar combineAndClean soccerAnalytics/seasonsData/spanishLaLiga /user/$1/soccerAnalytics/data
+fileName='spanishLaLiga.csv'
 fi
-if [ $directory -eq 3 ]
+if [ $2 -eq 3 ]
 then
-hadoop jar combineAndClean.jar combineAndClean soccerAnalytics/seasonsData/italianSerieA /user/$1/soccerAnalytics/data
+hadoop jar combineAndClean/combineAndClean.jar combineAndClean soccerAnalytics/seasonsData/italianSerieA /user/$1/soccerAnalytics/data
+fileName='italianSerieA.csv'
 fi
-if [ $directory -eq 4 ]
+if [ $2 -eq 4 ]
 then
-hadoop jar combineAndClean.jar combineAndClean soccerAnalytics/seasonsData /user/$1/soccerAnalytics/data
+hadoop jar combineAndClean/combineAndClean.jar combineAndClean soccerAnalytics/seasonsData /user/$1/soccerAnalytics/data
+fileName='allLeagues.csv'
 fi
 
-cd ..
-echo Enter data file name:
-read fileName
 hdfs dfs -mv soccerAnalytics/data/part-r-00000 soccerAnalytics/data/$fileName
 hdfs dfs -rm soccerAnalytics/data/_SUCCESS
 
