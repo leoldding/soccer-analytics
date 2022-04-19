@@ -1,8 +1,7 @@
 echo Enter netid:
 read netid
 
-echo Enter password:
-read -s password
+password=`systemd-ask-password --timeout=0 "Enter password:"`
 
 echo Which dataset do you want to analyze?
 echo Enter dataset number:
