@@ -80,6 +80,7 @@ public class combineAndCleanMapper extends Mapper<Object, Text, Text, Text> {
 			    viableRecord = false;
 			    break loop3;
 			}
+			record.append(values[i]).append(",");
 		    }
 		}
             }
