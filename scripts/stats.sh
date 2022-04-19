@@ -17,8 +17,7 @@ then
 fileName='allLeaguesStatistics.csv'
 fi
 
-mkdir impalaoutput
-
+rm impalaoutput/$fileName
 impala-shell -i hc08.nyu.cluster -f scripts/impala.sql --var=netid=$1 -B -o impalaoutput/$fileName --output_delimiter=',' --print_header;
 
 

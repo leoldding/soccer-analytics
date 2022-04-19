@@ -1,22 +1,4 @@
-echo 'Is this the first time running the script? [yes/no]'
-read res
-if [ $res = 'yes' ]
-then
-hdfs dfs -mkdir soccerAnalytics
-hdfs dfs -put seasonsData soccerAnalytics
-
-cd combineAndClean
-javac -classpath `yarn classpath` -d . combineAndCleanMapper.java
-javac -classpath `yarn classpath` -d . combineAndCleanReducer.java
-javac -classpath `yarn classpath`:. -d . combineAndClean.java
-jar -cvf combineAndClean.jar *.class
-cd ..
-fi
-
-if [ $res = 'no' ] 
-then
 hdfs dfs -rm -r soccerAnalytics/data
-fi
 
 if [ $2 -eq 1 ]
 then
@@ -42,9 +24,7 @@ fi
 hdfs dfs -mv soccerAnalytics/data/part-r-00000 soccerAnalytics/data/$fileName
 hdfs dfs -rm soccerAnalytics/data/_SUCCESS
 
-mkdir mroutput
 rm mroutput/$fileName
 hdfs dfs -copyToLocal soccerAnalytics/data/$fileName
-mv $fileName mroutput
-
+mv $fileName mroutput/
 
