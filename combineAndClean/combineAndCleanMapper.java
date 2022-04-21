@@ -43,6 +43,18 @@ public class combineAndCleanMapper extends Mapper<Object, Text, Text, Text> {
                             viableRecord = false;
                             break loop2;
                         }
+			else if(values[i].equals("H"))
+			{
+			    values[i] = "1";
+			}
+			else if(values[i].equals("A"))
+			{
+			    values[i] = "-1";
+			}
+			else
+			{
+			    values[i] = "0";
+			}
                     }
                     else
                     {
