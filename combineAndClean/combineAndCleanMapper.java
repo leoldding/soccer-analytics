@@ -98,7 +98,7 @@ public class combineAndCleanMapper extends Mapper<Object, Text, Text, Text> {
             }
             if(viableRecord)
             {
-                context.write(new Text("record"), new Text(record.toString().substring(0,record.length()-1)));
+                context.write(new Text("record"), new Text(record.toString()));
             }
         }
     }
