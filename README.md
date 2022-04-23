@@ -14,9 +14,22 @@ NYU Processing Big Data for Analytics Applications Project
 8. Feel free to repeat steps 5 through 7 for the other datasets.
 
 ## Outputs
-The MapReduce portion of the code will join and clean all of the datasets and output the file into *mroutput*.
-The Hive/Impala section will create a table using the MapReduce output and run summary statistics on it and output a file into *impalaoutput*.
 
+### MapReduce
+* Joins and cleans selected datasets.
+* Outputs into *mapreduceOutputs*.
+
+### Hive/Impala
+* Creates tables to hold data.
+* Runs summary statistics over whole dataset.
+* Outputs into *impalaOutputs*.
+
+### Spark
+* Runs logistic regression models on separated home and away data for only wins and losses.
+* Outputs into *sparkOutputs*
+* \*Preds.csv files contain model input data along with labels and final predictions.
+* \*Vals.csv files contain, in this order, model AUC ROC score, model coefficients of all 9 inputs, model intercept, and outcome labels.
+* \*Stats.csv files contain descriptive statistics for the home and away data sets with only wins and losses. 
 
 
 
