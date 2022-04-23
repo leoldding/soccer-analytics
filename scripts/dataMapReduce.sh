@@ -24,7 +24,7 @@ fi
 hdfs dfs -mv soccerAnalytics/data/part-r-00000 soccerAnalytics/data/$fileName
 hdfs dfs -rm soccerAnalytics/data/_SUCCESS
 
-rm mroutput/$fileName
+rm mapreduceOutputs/$fileName
 hdfs dfs -copyToLocal soccerAnalytics/data/$fileName
-mv $fileName mroutput/
+mv $fileName mapreduceOutputs/
 

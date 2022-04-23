@@ -9,5 +9,5 @@ echo "3: Italian Serie A"
 echo "4: All Leagues"
 read -p "Dataset Number: " league
 
-./scripts/datamr.sh $netid $league
-./scripts/stats.sh $netid $password $league
+./scripts/dataMapReduce.sh $netid $league
+./scripts/analysis.sh $netid $password $league

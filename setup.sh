@@ -1,7 +1,8 @@
-rm -r mroutput
-rm -r impalaoutput
-mkdir mroutput
-mkdir impalaoutput
+rm -r mapreduceOutputs 
+rm -r impalaOutputs
+rm -r sparkOutputs
+mkdir mapreduceOutputs
+mkdir impalaOutputs
 
 hdfs dfs -rm -r soccerAnalytics
 hdfs dfs -mkdir soccerAnalytics
