@@ -11,11 +11,14 @@ import org.apache.spark.ml.evaluation.BinaryClassificationEvaluator
 
 val spark = SparkSession.builder().appName("SparkML").enableHiveSupport().getOrCreate()
 
-val homeData = spark.sql("SELECT * FROM ld2425.home_stats WHERE full_time_result = 1 OR full_time_result = -1")
-val awayData = spark.sql("SELECT * FROM ld2425.away_stats WHERE full_time_result = 1 OR full_time_result = -1")
+val args = spark.sparkContext.getConf.get("spark.driver.args").split("\\s+")
+val netid = args(0)
+val dir = args(1)
+val homeData = spark.sql("SELECT * FROM " + netid + ".home_stats WHERE full_time_result = 1 OR full_time_result = -1")
+val awayData = spark.sql("SELECT * FROM " + netid + ".away_stats WHERE full_time_result = 1 OR full_time_result = -1")
 
-homeData.describe().coalesce(1).write.format("com.databricks.spark.csv").mode("overwrite").option("header", "true").save("soccerAnalytics/sparkOutputs/homeStats")
-awayData.describe().coalesce(1).write.format("com.databricks.spark.csv").mode("overwrite").option("header", "true").save("soccerAnalytics/sparkOutputs/awayStats")
+homeData.describe().coalesce(1).write.format("com.databricks.spark.csv").mode("overwrite").option("header", "true").save("soccerAnalytics/sparkOutputs/" + dir + "/homeStats")
+awayData.describe().coalesce(1).write.format("com.databricks.spark.csv").mode("overwrite").option("header", "true").save("soccerAnalytics/sparkOutputs/" + dir + "/awayStats")
 
 val Array(homeTrain, homeTest) = homeData.randomSplit(Array(0.8,0.2), 42)
 val Array(awayTrain, awayTest) = awayData.randomSplit(Array(0.8,0.2), 42)
@@ -31,19 +34,19 @@ val evaluator = new BinaryClassificationEvaluator().setLabelCol("label").setRawP
 
 val homeModel = pipeline.fit(homeTrain)
 val homePreds = homeModel.transform(homeTest)
-homePreds.drop("features").drop("rawPrediction").drop("probability").coalesce(1).write.format("com.databricks.spark.csv").mode("overwrite").option("header","true").save("soccerAnalytics/sparkOutputs/homePreds")
+homePreds.drop("features").drop("rawPrediction").drop("probability").coalesce(1).write.format("com.databricks.spark.csv").mode("overwrite").option("header","true").save("soccerAnalytics/sparkOutputs/" + dir + "/homePreds")
 
 val awayModel = pipeline.fit(awayTrain)
 val awayPreds = awayModel.transform(awayTest)
-awayPreds.drop("features").drop("rawPrediction").drop("probability").coalesce(1).write.format("com.databricks.spark.csv").mode("overwrite").option("header","true").save("soccerAnalytics/sparkOutputs/awayPreds")
+awayPreds.drop("features").drop("rawPrediction").drop("probability").coalesce(1).write.format("com.databricks.spark.csv").mode("overwrite").option("header","true").save("soccerAnalytics/sparkOutputs/" + dir + "/awayPreds")
 
 val homeModelVals = homeModel.stages(2).asInstanceOf[LogisticRegressionModel].coefficients.toArray
 val homeVals = List(evaluator.evaluate(homePreds), homeModelVals(0), homeModelVals(1), homeModelVals(2), homeModelVals(3), homeModelVals(4), homeModelVals(5), homeModelVals(6), homeModelVals(7), homeModelVals(8), homeModel.stages(1).asInstanceOf[StringIndexerModel].labels(0).toInt, homeModel.stages(1).asInstanceOf[StringIndexerModel].labels(1).toInt)
-homeVals.toDF().coalesce(1).write.format("com.databricks.spark.csv").mode("overwrite").option("header", "false").save("soccerAnalytics/sparkOutputs/homeVals")
+homeVals.toDF().coalesce(1).write.format("com.databricks.spark.csv").mode("overwrite").option("header", "false").save("soccerAnalytics/sparkOutputs/" + dir + "/homeVals")
 
 val awayModelVals = awayModel.stages(2).asInstanceOf[LogisticRegressionModel].coefficients.toArray
 val awayVals = List(evaluator.evaluate(awayPreds), awayModelVals(0), awayModelVals(1), awayModelVals(2), awayModelVals(3), awayModelVals(4), awayModelVals(5), awayModelVals(6), awayModelVals(7), awayModelVals(8), awayModel.stages(1).asInstanceOf[StringIndexerModel].labels(0).toInt, awayModel.stages(1).asInstanceOf[StringIndexerModel].labels(1).toInt)
-awayVals.toDF().coalesce(1).write.format("com.databricks.spark.csv").mode("overwrite").option("header", "false").save("soccerAnalytics/sparkOutputs/awayVals")
+awayVals.toDF().coalesce(1).write.format("com.databricks.spark.csv").mode("overwrite").option("header", "false").save("soccerAnalytics/sparkOutputs/" + dir + "/awayVals")
 
 spark.close()
 System.exit(0)
