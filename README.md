@@ -3,6 +3,7 @@ NYU Processing Big Data for Analytics Applications Project
 
 ## How To Run
 *This assumes that you are affiliated with NYU and are able to access the university's High Performance Cluster (HPC)*
+*NOTE: Scripts rely on passing of variables. Windows systems seem to end variables in a way that messes with variable values and thus will cause the program to not run properly.* 
 
 1. Upload whole soccerAnalytics folder into HPC login node. (i.e. scp -r soccerAnalytics *netid*@peel.hpc.nyu.edu:/home/*netid*)
 2. Make sure the current directory is the soccerAnalytics directory. To do so, enter the *cd soccerAnalytics* command.
