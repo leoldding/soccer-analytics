@@ -29,9 +29,7 @@ NYU Processing Big Data for Analytics Applications Project
 ### Spark
 * Runs logistic regression models on separated home and away data for only wins and losses.
 * Outputs into *sparkOutputs*
-* \*Preds.csv files contain model input data along with labels and final predictions.
-* \*Vals.csv files contain, in this order, model AUC ROC score, model coefficients of all 9 inputs, model intercept, and outcome labels.
-* \*Stats.csv files contain descriptive statistics for the home and away data sets with only wins and losses. 
-
-
+* \*Predictions.csv files contain model input data along with labels and final predictions.
+* \*Statistics.csv files contain descriptive statistics for the home and away data sets with only wins and losses.
+* \*Values.csv files contain, in this order, model AUC ROC score, model coefficients of all 9 inputs, model intercept, and outcome labels.
 
