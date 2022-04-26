@@ -37,5 +37,11 @@ mv sparkOutputs/$dirName/$tableBase'AwayValues'/part* sparkOutputs/$dirName/$tab
 mv sparkOutputs/$dirName/$tableBase'HomePredictions'/part* sparkOutputs/$dirName/$tableBase'HomePredictions.csv'
 mv sparkOutputs/$dirName/$tableBase'HomeStatistics'/part* sparkOutputs/$dirName/$tableBase'HomeStatistics.csv'
 mv sparkOutputs/$dirName/$tableBase'HomeValues'/part* sparkOutputs/$dirName/$tableBase'HomeValues.csv'
+if [ $3 -eq 4 ] 
+then
+mv sparkOutputs/$dirName/$tableBase'Silhouette'/part* sparkOutputs/$dirName/$tableBase'Silhouette.csv'
+fi
 rm -r sparkOutputs/$dirName/*/
+
+
 
