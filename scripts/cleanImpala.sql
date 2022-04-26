@@ -1,13 +1,13 @@
-invalidate metadat ${var:netid}.english;
-invalidate metadat ${var:netid}.english_away;
-invalidate metadat ${var:netid}.english_home;
-invalidate metadat ${var:netid}.spanish;
-invalidate metadat ${var:netid}.spanish_away;
-invalidate metadat ${var:netid}.spanish_home;
-invalidate metadat ${var:netid}.italian;
-invalidate metadat ${var:netid}.italian_away;
-invalidate metadat ${var:netid}.italian_home;
-invalidate metadat ${var:netid}.all_leagues;
-invalidate metadat ${var:netid}.all_leagues_away;
-invalidate metadat ${var:netid}.all_leagues_home;
+invalidate metadata ${var:netid}.english;
+invalidate metadata ${var:netid}.english_away;
+invalidate metadata ${var:netid}.english_home;
+invalidate metadata ${var:netid}.spanish;
+invalidate metadata ${var:netid}.spanish_away;
+invalidate metadata ${var:netid}.spanish_home;
+invalidate metadata ${var:netid}.italian;
+invalidate metadata ${var:netid}.italian_away;
+invalidate metadata ${var:netid}.italian_home;
+invalidate metadata ${var:netid}.all_leagues;
+invalidate metadata ${var:netid}.all_leagues_away;
+invalidate metadata ${var:netid}.all_leagues_home;
 
