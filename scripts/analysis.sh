@@ -25,8 +25,8 @@ fi
 
 beeline -u jdbc:hive2://hm-1.hpc.nyu.edu:10000/ -n $1 -p $2 -f scripts/hive.hql --hiveconf netid=$1 --hiveconf tableBase=$tableBase;
 
-#rm impalaOutputs/$fileName
-#impala-shell -i hc08.nyu.cluster -f scripts/impala.sql --var=netid=$1 --var=tableBase=$tableBase -B -o impalaOutputs/$fileName --output_delimiter=',' --print_header;
+rm impalaOutputs/$fileName
+impala-shell -i hc08.nyu.cluster -f scripts/impala.sql --var=netid=$1 --var=tableBase=$tableBase -B -o impalaOutputs/$fileName --output_delimiter=',' --print_header;
 
 rm -r sparkOutputs/$dirName
 spark-shell --deploy-mode client -i scripts/spark.scala --conf spark.driver.args="$1 $dirName $tableBase"
@@ -38,6 +38,4 @@ mv sparkOutputs/$dirName/$tableBase'HomePredictions'/part* sparkOutputs/$dirName
 mv sparkOutputs/$dirName/$tableBase'HomeStatistics'/part* sparkOutputs/$dirName/$tableBase'HomeStatistics.csv'
 mv sparkOutputs/$dirName/$tableBase'HomeValues'/part* sparkOutputs/$dirName/$tableBase'HomeValues.csv'
 rm -r sparkOutputs/$dirName/*/
-
-
 
