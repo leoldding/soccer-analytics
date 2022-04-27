@@ -1,12 +1,19 @@
 # Soccer Analytics
 NYU Processing Big Data for Analytics Applications Project
 
+## Data
+The data used for any analysis can be found in the *seasonsData* directory.
+Data comes from the three sources below. License: Open Data Commons
+1. https://datahub.io/sports-data/english-premier-league
+2. https://datahub.io/sports-data/spanish-la-liga
+3. https://datahub.io/sports-data/italian-serie-a
+
 ## How To Run
 *This assumes that you are affiliated with NYU and are able to access the university's High Performance Cluster (HPC)*
 
 1. Upload whole soccerAnalytics folder into HPC login node. (i.e. scp -r soccerAnalytics *netid*@peel.hpc.nyu.edu:/home/*netid*)
 2. Make sure the current directory is the soccerAnalytics directory. To do so, enter the *cd soccerAnalytics* command.
-3. Make sure that all .sh files are executable. If they are not, running *chmod 755 (fileName).sh* will allow for file execution. There are four .sh files in total: setup.sh, runProject.sh, scripts/datamr.sh, scripts/stats.sh. 
+3. Make sure that all .sh files are executable. If they are not, running *chmod 755 (fileName).sh* will allow for file execution. There are five .sh files in total: setup.sh, runProject.sh, scripts/dataMapReduce.sh, scripts/analysis.sh, clean.sh. 
 4. Run the *setup.sh* file by entering *./setup.sh* into the terminal.
 5. Run the *runProject.sh* file by entering *./runProject.sh* into the terminal.
 6. Respond to the initial text prompts from *runProject.sh*.
@@ -32,4 +39,5 @@ NYU Processing Big Data for Analytics Applications Project
 * \*Predictions.csv files contain model input data along with labels and final predictions.
 * \*Statistics.csv files contain descriptive statistics for the home and away data sets with only wins and losses.
 * \*Values.csv files contain, in this order, model AUC ROC score, model coefficients of all 9 inputs, model intercept, and outcome labels.
-
+* Also runs KMeans for k = 2 to 6, but only when all leagues are selected.
+* \*Silhouette.csv file contains the silhouette scores in order for k = 2 to 6.
