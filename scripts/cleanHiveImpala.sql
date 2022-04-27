@@ -1,4 +1,4 @@
-use ${hiveconf:netid};
+use ${var:netid};
 
 DROP TABLE IF EXISTS english;
 DROP TABLE IF EXISTS english_away;
@@ -12,4 +12,3 @@ DROP TABLE IF EXISTS italian_home;
 DROP TABLE IF EXISTS all_leagues;
 DROP TABLE IF EXISTS all_leagues_away;
 DROP TABLE IF EXISTS all_leagues_home;
-
