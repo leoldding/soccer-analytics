@@ -1,5 +1,7 @@
+-- use your own database
 use ${var:netid};
 
+-- remove all tables that have been used
 DROP TABLE IF EXISTS english;
 DROP TABLE IF EXISTS english_away;
 DROP TABLE IF EXISTS english_home;

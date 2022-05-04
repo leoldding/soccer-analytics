@@ -10,6 +10,7 @@ public class combineAndCleanReducer extends Reducer<Text, Text, Text, Text>{
     @Override
     public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException
     {
+        // output each record to file
         for(Text value : values)
         {
             context.write(new Text(value), new Text());

@@ -1,3 +1,4 @@
+# read in variables
 read -p "Enter netid: " netid
 
 password=`systemd-ask-password --timeout=0 "Enter password:"`
@@ -9,5 +10,7 @@ echo "3: Italian Serie A"
 echo "4: All Leagues"
 read -p "Dataset Number: " league
 
+# run MapReduce files
 ./scripts/dataMapReduce.sh $netid $league
+# run Hive/Impala/Spark files
 ./scripts/analysis.sh $netid $password $league
